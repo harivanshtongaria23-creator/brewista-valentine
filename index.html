@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brewista Valentine 💕</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd6e8, #ffeaf4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+.card {
+  background: #fff0f6;
+  border-radius: 28px;
+  padding: 30px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.logo { width:120px; margin-bottom:10px; }
+
+.initiative {
+  font-size: 14px;
+  color: #a0527a;
+  margin-bottom: 10px;
+}
+
+h1 { color:#ff4d8d; }
+
+.location { font-size:13px; margin-bottom:20px; }
+
+.location a {
+  color:#ff4d8d;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.buttons { margin-top:20px; height:120px; position:relative; }
+
+button {
+  padding:12px 28px;
+  border:none;
+  border-radius:25px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+#yesBtn { background:#ff5fa2; color:white; }
+#noBtn { background:#ffe0ec; color:#ff4d8d; position:absolute; }
+
+.loveText {
+  display:none;
+  margin-top:20px;
+  font-size:22px;
+  color:#ff4d8d;
+}
+
+/* Coupon popup */
+.popup {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.popup-box {
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+  max-width:300px;
+}
+
+.coupon {
+  background:#ffe0ec;
+  padding:10px;
+  border-radius:10px;
+  font-weight:600;
+  margin:10px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <img src="brewista-logo.jpg" class="logo">
+
+  <div class="initiative">Initiative by Brewista Coffee Jaipur</div>
+
+  <h1>Will you be my Valentine? 💗</h1>
+
+  <div class="location">
+    📍 <a href="https://share.google/HLuYOOIQL8g6VB6gs" target="_blank">
+    Brewista Jaipur Location
+    </a>
+  </div>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 🙈</button>
+  </div>
+
+  <div class="loveText" id="loveText">
+    YAYYYY 🎉💞<br>
+    Celebrate love at Brewista ☕💗
+  </div>
+</div>
+
+<!-- Coupon Popup -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <h3>Valentine Gift 💝</h3>
+    <p>You unlocked a coupon!</p>
+    <div class="coupon">10% OFF at Brewista</div>
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+const loveText=document.getElementById("loveText");
+const popup=document.getElementById("popup");
+
+let texts=["No 🙈","Really? 🥺","Think again 😏","Last chance 😍"];
+let i=0;
+
+noBtn.style.left="140px";
+noBtn.style.top="60px";
+
+["mouseover","touchstart","click"].forEach(evt=>{
+  noBtn.addEventListener(evt,()=>{
+    noBtn.style.left=Math.random()*250+"px";
+    noBtn.style.top=Math.random()*80+"px";
+    i=(i+1)%texts.length;
+    noBtn.textContent=texts[i];
+  });
+});
+
+yesBtn.addEventListener("click",()=>{
+  document.querySelector(".buttons").style.display="none";
+  loveText.style.display="block";
+
+  confetti({particleCount:200,spread:90});
+
+  setTimeout(()=>{
+    popup.style.display="flex";
+  },800);
+});
+
+function closePopup(){
+  popup.style.display="none";
+}
+</script>
+
+</body>
+</html>
